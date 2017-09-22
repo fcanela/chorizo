@@ -2,12 +2,12 @@
   "name": "chorizo",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./logger.js",
   "scripts": {
     "test": "mocha test.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Francisco Canela (fcanela) <fcanela.dev+npm@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^3.5.3",
