@@ -39,7 +39,7 @@ proto.fatal = function(line) {
 };
 
 proto.stack = function(line) {
-  this.logger.writeError(this._format('STACK', line));
+  this.logger.writeError(this._format('STACK', line.stack));
 };
 
 module.exports = ContextLogger;
