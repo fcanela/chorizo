@@ -20,22 +20,31 @@ proto.warn = function(line) {
   this.logger.write(this._format('WARN', line));
 };
 
-proto.error = function(line) {
-  if (line instanceof Error) {
-    this.logger.writeError(this._format('ERROR', line.message));
-    this.stack(line);
-  } else {
-    this.logger.writeError(this._format('ERROR', line));
+proto._handleError = function(level, line, error) {
+  // Called with message and error
+  if (error) {
+    this.logger.writeError(this._format(level, line));
+    this.stack(error);
+    return;
   }
+
+  // Called with error only
+  if (line instanceof Error) {
+    this.logger.writeError(this._format(level, line.message));
+    this.stack(line);
+    return;
+  }
+
+  // Called with message
+  this.logger.writeError(this._format(level, line));
 };
 
-proto.fatal = function(line) {
-  if (line instanceof Error) {
-    this.logger.writeError(this._format('FATAL', line.message));
-    this.stack(line);
-  } else {
-    this.logger.writeError(this._format('FATAL', line));
-  }
+proto.error = function(line, error) {
+  this._handleError('ERROR', line, error);
+};
+
+proto.fatal = function(line, error) {
+  this._handleError('FATAL', line, error);
 };
 
 proto.stack = function(line) {
