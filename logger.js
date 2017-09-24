@@ -1,5 +1,8 @@
 'use strict';
 
+const EventEmitter = require('events').EventEmitter;
+const util = require('util');
+
 const ContextLogger = require('./context');
 
 function Logger() {
@@ -14,8 +17,10 @@ function Logger() {
   };
   this.write = console.log;
   this.writeError = console.error;
+
 }
 
+util.inherits(Logger, EventEmitter);
 const proto = Logger.prototype;
 
 proto.for = function createContextLogger(context) {

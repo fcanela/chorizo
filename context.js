@@ -14,10 +14,12 @@ proto._format = function(level, line) {
 
 proto.info = function(line) {
   this.logger.write(this._format('INFO', line));
+  this.logger.emit('info', line);
 };
 
 proto.warn = function(line) {
   this.logger.write(this._format('WARN', line));
+  this.logger.emit('warn', line);
 };
 
 proto._handleError = function(level, line, error) {
@@ -41,14 +43,17 @@ proto._handleError = function(level, line, error) {
 
 proto.error = function(line, error) {
   this._handleError('ERROR', line, error);
+  this.logger.emit('err', line, error);
 };
 
 proto.fatal = function(line, error) {
   this._handleError('FATAL', line, error);
+  this.logger.emit('fatal', line, error);
 };
 
-proto.stack = function(line) {
-  this.logger.writeError(this._format('STACK', line.stack));
+proto.stack = function(error) {
+  this.logger.writeError(this._format('STACK', error.stack));
+  this.logger.emit('stack', error);
 };
 
 module.exports = ContextLogger;
