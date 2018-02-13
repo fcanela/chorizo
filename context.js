@@ -12,15 +12,13 @@ proto._format = function(level, line) {
   return this.logger.format(this.name, level, line);
 };
 
-proto.info = function(line) {
-  this.logger.write(this._format('INFO', line));
-  this.logger.emit('info', line);
-};
 
-proto.warn = function(line) {
-  this.logger.write(this._format('WARN', line));
-  this.logger.emit('warn', line);
-};
+['info', 'warn', 'debug'].forEach((level) => {
+  proto[level] = function(line) {
+    this.logger.write(this._format(level.toUpperCase(), line));
+    this.logger.emit(level, line);
+  }
+});
 
 proto._handleError = function(level, line, error) {
   // Called with message and error

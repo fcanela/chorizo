@@ -26,27 +26,18 @@ describe('Logger', () => {
     logger.writeError = sinon.spy();
   });
 
-  describe('.info', () => {
-    it('should write the message in stdout', function() {
-      const spy = logger.write;
 
-      cxtLogger.info('test');
+  ['info', 'warn', 'debug'].forEach((level) => {
+    describe('.' + level, () => {
+      it('should write the message in stdout', function() {
+        const spy = logger.write;
 
-      expect(spy.callCount).to.equal(1);
-      const param = spy.getCall(0).args[0];
-      expect(param).to.equal('x y z INFO cxt test');
-    });
-  });
+        cxtLogger[level]('test');
 
-  describe('.warn', () => {
-    it('should write the message in stdout', function() {
-      const spy = logger.write;
-
-      cxtLogger.warn('test');
-
-      expect(spy.callCount).to.equal(1);
-      const param = spy.getCall(0).args[0];
-      expect(param).to.equal('x y z WARN cxt test');
+        expect(spy.callCount).to.equal(1);
+        const param = spy.getCall(0).args[0];
+        expect(param).to.equal('x y z ' + level.toUpperCase() + ' cxt test');
+      });
     });
   });
 
