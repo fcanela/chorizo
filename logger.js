@@ -18,6 +18,7 @@ function Logger() {
   this.write = console.log;
   this.writeError = console.error;
 
+  EventEmitter.call(this);
 }
 
 util.inherits(Logger, EventEmitter);

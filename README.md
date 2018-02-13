@@ -11,6 +11,7 @@ logger.fatal('An unkown exception ocurred.');
 logger.error('Something controlled happened.');
 logger.warn('This was unexpected.');
 logger.info('Everything ok. Just reporting.');
+logger.debug('Useful when everything is on fire');
 ```
 
-`info` and `warn` outputs to `stdout`. `fatal` and `error` accepts a string or error object and outputs to `stderr`.
+`info`, `warn` and `debug` outputs to `stdout`. `fatal` and `error` accepts a string or error object and outputs to `stderr`.
