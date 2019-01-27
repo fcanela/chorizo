@@ -1,6 +1,6 @@
 # Chorizo
 
-Chorizo is an opiniorated contextual logger
+Chorizo is an opinionated contextual logger
 
 ## Usage
 
